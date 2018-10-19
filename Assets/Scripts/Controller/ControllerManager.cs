@@ -18,6 +18,8 @@ namespace Controller
             return _instance;
         }
 
+        private ViewManager _viewManager;
+
         private void Start()
         {
             var _modelManager = ModelManager.getInstance();
@@ -26,8 +28,8 @@ namespace Controller
             obj.transform.parent = this.transform;
             
             obj = new GameObject("ViewManager");
-            var viewManager = obj.AddComponent<ViewManager>();
-            obj.transform.parent = this.transform;
+            _viewManager = obj.AddComponent<ViewManager>();
+            obj.transform.parent = transform;
 
             _modelManager.StartLoad();
 
@@ -36,7 +38,8 @@ namespace Controller
 
         private void LoadCompleteCallbackHandler()
         {
-            Debug.Log("controller LoadCompleteCallbackHandler");
+            //Debug.Log("controller LoadCompleteCallbackHandler");
+            _viewManager.LoadComplete();
             
         }
 
